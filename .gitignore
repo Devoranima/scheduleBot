@@ -1,0 +1,9 @@
+#node
+package-lock.json
+node_modules
+
+#build
+dist
+
+#environment vars
+.env
