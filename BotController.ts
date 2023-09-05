@@ -1,7 +1,8 @@
 import {Telegraf, Markup, Context} from 'telegraf';
 import dotenv from 'dotenv';
 import { Update } from 'telegraf/typings/core/types/typegram';
-import { checkIfDateGood, formatReply, getScheduleForDay, getWeek } from './utils/functions';
+import { formatReply, getWeek } from './utils/functions';
+import { days } from './utils/constants';
 dotenv.config();
 
 const bot_token = process.env.BOT_TOKEN as string;
@@ -43,7 +44,6 @@ export class Bot extends Telegraf<Context<Update>>{
         Markup.keyboard([
             ['Today 📜', 'Tomorrow 📋', 'Week 📚'],
         ])
-        .oneTime()
         .resize()
       )
     })
@@ -55,7 +55,7 @@ export class Bot extends Telegraf<Context<Update>>{
       const week = getWeek(date);
       const day = date.getDay();
       const reply = formatReply(day, week);
-      return ctx.reply(reply);
+      return ctx.replyWithMarkdown(reply);
     })
   }
 
@@ -67,13 +67,19 @@ export class Bot extends Telegraf<Context<Update>>{
       const day = tomorrow.getDay();
       const week = getWeek(tomorrow);
       const reply = formatReply(day, week);
-      return ctx.reply(reply);
+      return ctx.replyWithMarkdown(reply);
     })
   }
 
   handleWeek(){
     this.hears('Week 📚', (ctx)=>{
-      ctx.reply('not ready yet')
+      const week = getWeek(new Date());
+      let reply = [] as string [];
+      for(let i = 0; i < 5; i++){
+        reply.push( `_${days[i]}_\n\n${formatReply(i+1, week)}`);
+      }
+
+      ctx.replyWithMarkdown(reply.join('\n\n\n'))
     })
   }
 

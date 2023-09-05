@@ -44,4 +44,6 @@ for (let i = 0; i < 5; i++){
   schedule.push(day)
 }
 
+export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 export {schedule}

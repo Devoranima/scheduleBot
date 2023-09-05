@@ -26,7 +26,7 @@ export const formatReply = (day: number, week: 'odd' | 'even') => {
   const reply = [] as string [];
   for (let i = 0; i < 7; i++){
     if (schedule[i]){
-      reply.push(`${timetable[i]}: ${schedule[i].name} ${schedule[i].room || 'ЭОР'}`);
+      reply.push(`*${timetable[i]}*: ${schedule[i].name} ${schedule[i].room || 'ЭОР'}`);
     }
   }
   return reply.join('\n');
