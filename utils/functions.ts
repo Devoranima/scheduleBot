@@ -1,5 +1,5 @@
 import { firstSempt, schedule, timetable } from "./constants";
-import { day, lesson } from './types';
+import {lesson } from './types';
 
 
 export const getWeek = (date: Date) => {
